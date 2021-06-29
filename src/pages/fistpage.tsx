@@ -9,7 +9,7 @@ const fistpage = () => {
   return (
     <div>
       <div>
-        <Button onClick={() => sayHi}>Botoncito</Button>
+        <Button onClick={sayHi}>Botoncito</Button>
       </div>
     </div>
   );
