@@ -16,6 +16,12 @@
     "baseUrl": "src",
     "paths": { "@/components/*": ["components/*"] }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "firebaseClient.js",
+    "firebaseAdmin.js"
+  ],
   "exclude": ["node_modules"]
 }
