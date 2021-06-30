@@ -52,7 +52,6 @@ export default function Login() {
 
         <Stack justify="center" mt={6} isInline spacing={10}>
           <Button
-            minWitdh="40%"
             variant="dark"
             disabled={email === "" || pass === ""}
             onClick={async () => {
@@ -78,7 +77,6 @@ export default function Login() {
           </Button>
 
           <Button
-            minWitdh="40%"
             variant="success"
             disabled={email === "" || pass === ""}
             onClick={async () => {
