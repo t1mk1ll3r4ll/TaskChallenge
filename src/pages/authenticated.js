@@ -15,11 +15,9 @@ function Authenticated({ session }) {
           <Heading as="h2" textAlign="center">
             Lista de tareas
           </Heading>
-        </Box>
-        <Box w={500} p={4} my={12} mx="auto">
+
           <Button
-            variant="Danger"
-            width="100%"
+            variant="warning"
             onClick={async () => {
               await firebase.auth().signOut();
               window.location.href = "/";
@@ -52,7 +50,7 @@ export async function getServerSidePorps(context) {
   } catch (err) {
     context.res.writeHead(302, { location: "/login" });
     context.res.end();
-    return { props: [] };
+    return { props: {} };
   }
 }
-//export default Authenticated;
+export default Authenticated;

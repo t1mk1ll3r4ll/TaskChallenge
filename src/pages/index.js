@@ -4,6 +4,7 @@ import Container from "@/components/container";
 import { Flex, Box, Heading, Stack } from "@chakra-ui/react";
 import { Button } from "react-bootstrap";
 import { useRouter } from "next/router";
+import firebase from "firebase/app";
 
 export default function Home() {
   const { user } = useAuth();
@@ -43,6 +44,17 @@ export default function Home() {
               disabled={user}
             >
               <a> iniciar sesion </a>
+            </Button>
+
+            <Button
+              variant="danger"
+              width="100%"
+              onClick={async () => {
+                await firebase.auth().signOut();
+                window.location.href = "/";
+              }}
+            >
+              Cerrar sesion
             </Button>
           </Stack>
         </Box>
