@@ -1,11 +1,13 @@
 import React from "react";
 import { useAuth } from "../auth";
 import Container from "@/components/container";
-import { Flex, Box, Button, Text, Heading, Stack } from "@chakra-ui/react";
+import { Flex, Box, Heading, Stack } from "@chakra-ui/react";
+import { Button } from "react-bootstrap";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  // const {user} = useAuth();
-  // console.log(useAuth);
+  const { user } = useAuth();
+  const router = useRouter();
   return (
     <Container>
       <Flex>
@@ -13,29 +15,32 @@ export default function Home() {
           <Heading as="h2" textAlign="center">
             Bienvendio a la pagina principal.
           </Heading>
-          <Text
-            mt={8}
-            textAlign="center"
-            // {...`User ID: ${
-            //   user ? user.uid : "No existe un usuario con sesion activa"
-            // }`}
-          ></Text>
+          <div style={{ textAlign: "center" }}>
+            {`Usuario conectado: ${
+              user ? user.email : "No existe un usuario con sesion activa"
+            }`}
+          </div>
+
           <Stack
             mt={8}
             alignItems="center"
             justifyContent="center"
-            isInline
             width="100%"
           >
-            <Button variant="solid" variantColor="blue" width="100%">
+            <Button
+              variant="primary"
+              onClick={() => router.push("/authenticated")}
+              disabled={!user}
+              width="100%"
+            >
               <a> ir a la pagina principal. </a>
             </Button>
 
             <Button
-              variant="solid"
-              variantColor="green"
+              variant="success"
               width="100%"
-              //isDisabled={user}
+              onClick={() => router.push("/login")}
+              disabled={user}
             >
               <a> iniciar sesion </a>
             </Button>

@@ -8,12 +8,12 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   firebaseClient();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(undefined);
 
   useEffect(() => {
     return firebase.auth().onIdTokenChanged(async (user) => {
       if (!user) {
-        setUser(null);
+        setUser(undefined);
         nookies.set(undefined, "token", "", {});
         return;
       }
@@ -24,9 +24,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user }}>
-      {props.children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
   );
 };
 

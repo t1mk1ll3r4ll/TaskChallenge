@@ -21,7 +21,8 @@
     "**/*.ts",
     "**/*.tsx",
     "firebaseClient.js",
-    "firebaseAdmin.js"
+    "firebaseAdmin.js",
+    "src/pages/index.js"
   ],
   "exclude": ["node_modules"]
 }
