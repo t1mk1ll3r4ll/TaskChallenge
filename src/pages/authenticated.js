@@ -3,7 +3,7 @@ import { Heading } from "@chakra-ui/react";
 import { Button } from "react-bootstrap";
 import firebaseclient from "../firebaseClient";
 import firebase from "firebase";
-import { Table } from "react-bootstrap";
+import Table from "../components/Table";
 import {
   Flex,
   Box,
@@ -106,12 +106,13 @@ export default function Authenticated() {
           </Stack>
         </Box>
       </Flex>
+
       <Table></Table>
     </div>
   );
 }
 
-function subirdatos(name, desc, start, expire, status) {
+function subirdatos(name, desc, start, expire) {
   const db = firebase.firestore();
 
   db.collection("Tarea")
@@ -122,7 +123,7 @@ function subirdatos(name, desc, start, expire, status) {
       expire: expire,
       status: "ongoing",
     })
-    .then((docRef) => {
+    .then(() => {
       alert("Tarea escrita con exito");
     })
     .catch((error) => {
