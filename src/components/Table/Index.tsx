@@ -4,39 +4,27 @@ import firebaseclient from "../../firebaseClient";
 import firebase from "firebase";
 
 export default function Filltable() {
-  firebaseclient();
-  const db = firebase.firestore();
-  const [tablefilled, setTableFilled] = useState("");
+  const [tablefilled, setTableFilled] = useState([]);
+
   useEffect(() => {
-    let table = document.getElementById("tbody1");
-    let newrow = ``;
+    getAllData();
+  });
+
+  const getAllData = () => {
+    firebaseclient();
+    const db = firebase.firestore();
+    let listT: any = [];
     db.collection("Tarea")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          let data = doc.data();
-
-          if (!table) {
-            console.log("error");
-          } else {
-            table.innerHTML += newrow;
-          }
-          let row = `<tr>
-                    <td>${data.name}</td>
-                    <td>${data.description}</td>
-                    <td>${data.start}</td>
-                    <td>${data.expire}</td>
-                    <td>${data.status}</td>
-                    </tr>`;
-          if (!table) {
-            console.log("error");
-          } else {
-            table.innerHTML += row;
-            setTableFilled(data.uid);
-          }
+          // console.log(doc.data());
+          listT.push(doc.data);
         });
       });
-  }, [tablefilled]);
+    setTableFilled(listT);
+    console.log(tablefilled);
+  };
 
   return (
     <div>
@@ -44,50 +32,30 @@ export default function Filltable() {
         cargar lista
       </Button>
 
-      <Table striped bordered hover responsive size="sm" id="table1">
-        <tr>
-          <thead>
+      <Table striped bordered hover responsive size="sm">
+        <thead>
+          <tr>
             <th>Nombre</th>
             <th>Descripcion</th>
             <th>Inicio</th>
             <th>Finalizacion</th>
             <th>Status</th>
             <th>Acciones</th>
-          </thead>
-          <tbody id="tbody1"></tbody>
-        </tr>
+          </tr>
+        </thead>
+        <tbody>
+          {tablefilled &&
+            tablefilled.map((row: any, index) => (
+              <tr key={index}>
+                <th>{row.name}</th>
+                <th>{row.description}</th>
+                <th>{row.start}</th>
+                <th>{row.expire}</th>
+                <th>{row.status}</th>
+              </tr>
+            ))}
+        </tbody>
       </Table>
     </div>
   );
 }
-/*function getAllData() {
-  firebaseclient();
-  const db = firebase.firestore();
-
-  db.collection("Tarea")
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        let data = doc.data();
-        let table = document.getElementById("table1");
-        let newrow = ``;
-        if (!table) {
-          console.log("error");
-        } else {
-          table.innerHTML += newrow;
-        }
-        let row = `<tr>
-                    <td>${data.name}</td>
-                    <td>${data.description}</td>
-                    <td>${data.start}</td>
-                    <td>${data.expire}</td>
-                    <td>${data.status}</td>
-                    </tr>`;
-        if (!table) {
-          console.log("error");
-        } else {
-          table.innerHTML += row;
-        }
-      });
-    });
-    }*/

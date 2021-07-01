@@ -62,7 +62,6 @@ export default function Authenticated() {
               <Input
                 onChange={(e) => setName(e.target.value)}
                 type="text"
-                id="taskName"
                 value={name}
                 aria-describedby="taskName-helper-text"
               ></Input>
@@ -73,7 +72,6 @@ export default function Authenticated() {
               <Input
                 onChange={(e) => setDesc(e.target.value)}
                 type="text"
-                id="taskDesc"
                 value={desc}
                 aria-describedby="taskDesc-helper-text"
               ></Input>
@@ -87,7 +85,6 @@ export default function Authenticated() {
               <Input
                 onChange={(e) => setStart(e.target.value)}
                 type="datetime-local"
-                id="taskStart"
                 value={start}
                 aria-describedby="taskstart-helper-text"
               ></Input>
@@ -98,7 +95,6 @@ export default function Authenticated() {
               <Input
                 onChange={(e) => setExpire(e.target.value)}
                 type="datetime-local"
-                id="taskExpire"
                 value={expire}
                 aria-describedby="taskExpire-helper-text"
               ></Input>
