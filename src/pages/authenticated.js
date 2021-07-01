@@ -3,7 +3,7 @@ import { Heading } from "@chakra-ui/react";
 import { Button } from "react-bootstrap";
 import firebaseclient from "../firebaseClient";
 import firebase from "firebase";
-import Table from "../components/Table";
+import Tablefill from "../components/Table";
 import {
   Flex,
   Box,
@@ -103,7 +103,7 @@ export default function Authenticated() {
         </Box>
       </Flex>
 
-      <Table></Table>
+      <Tablefill></Tablefill>
     </div>
   );
 }
