@@ -1,43 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import firebaseclient from "../../firebaseClient";
 import firebase from "firebase";
-import { Box } from "@chakra-ui/react";
 
 export default function Filltable() {
   firebaseclient();
   const db = firebase.firestore();
+  const [tablefilled, setTableFilled] = useState("");
   useEffect(() => {
-    return () => {
-      let table = document.getElementById("table1");
-      let newrow = ``;
-      db.collection("Tarea")
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            let data = doc.data();
+    let table = document.getElementById("tbody1");
+    let newrow = ``;
+    db.collection("Tarea")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          let data = doc.data();
 
-            if (!table) {
-              console.log("error");
-            } else {
-              table.innerHTML += newrow;
-            }
-            let row = `<tr>
+          if (!table) {
+            console.log("error");
+          } else {
+            table.innerHTML += newrow;
+          }
+          let row = `<tr>
                     <td>${data.name}</td>
                     <td>${data.description}</td>
                     <td>${data.start}</td>
                     <td>${data.expire}</td>
                     <td>${data.status}</td>
                     </tr>`;
-            if (!table) {
-              console.log("error");
-            } else {
-              table.innerHTML += row;
-            }
-          });
+          if (!table) {
+            console.log("error");
+          } else {
+            table.innerHTML += row;
+            setTableFilled(data.uid);
+          }
         });
-    };
-  });
+      });
+  }, [tablefilled]);
+
   return (
     <div>
       <Button variant="warning" size="sm">
