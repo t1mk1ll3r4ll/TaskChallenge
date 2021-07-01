@@ -19,11 +19,11 @@ export default function Filltable() {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           // console.log(doc.data());
-          listT.push(doc.data);
+          listT.push(doc.data());
+          setTableFilled(listT);
+          //console.log(tablefilled);
         });
       });
-    setTableFilled(listT);
-    console.log(tablefilled);
   };
 
   return (
