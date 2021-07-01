@@ -20,10 +20,13 @@ export default function Filltable() {
         querySnapshot.forEach((doc) => {
           // console.log(doc.data());
           listT.push(doc.data());
+          console.log(doc.id, "=>", doc.data());
           setTableFilled(listT);
           //console.log(tablefilled);
         });
       });
+
+    //console.log(tablefilled);
   };
 
   return (
@@ -45,13 +48,13 @@ export default function Filltable() {
         </thead>
         <tbody>
           {tablefilled &&
-            tablefilled.map((row: any, index) => (
-              <tr key={index}>
-                <th>{row.name}</th>
-                <th>{row.description}</th>
-                <th>{row.start}</th>
-                <th>{row.expire}</th>
-                <th>{row.status}</th>
+            tablefilled.map((row: any, index: any) => (
+              <tr key={row}>
+                <th>{index.name}</th>
+                <th>{index.description}</th>
+                <th>{index.start}</th>
+                <th>{index.expire}</th>
+                <th>{index.status}</th>
               </tr>
             ))}
         </tbody>

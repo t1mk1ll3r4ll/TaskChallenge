@@ -1,13 +1,13 @@
 import firebase from "firebase";
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyACby9Q7Dfw6qZWYJ8nNX8lLJwM8TK-RQM",
-  authDomain: "taskchallenge-111c6.firebaseapp.com",
-  databaseURL: "https://taskchallenge-111c6-default-rtdb.firebaseio.com",
-  projectId: "taskchallenge-111c6",
-  storageBucket: "taskchallenge-111c6.appspot.com",
-  messagingSenderId: "351672149678",
-  appId: "1:351672149678:web:f2d54e281a6f9bf453ef3f",
+  apiKey: "AIzaSyDbsJGbATEwxzlvtrsRUoiGrHC-SF1iuKA",
+  authDomain: "challenge-d87fe.firebaseapp.com",
+  projectId: "challenge-d87fe",
+  storageBucket: "challenge-d87fe.appspot.com",
+  messagingSenderId: "633184499800",
+  appId: "1:633184499800:web:7df1d2bae671b4c6ec322d",
   measurementId: "G-XBMDDMJY4Z",
+  databaseURL: "https://challenge-d87fe-default-rtdb.firebaseio.com/",
 };
 
 export default function firebaseClient() {

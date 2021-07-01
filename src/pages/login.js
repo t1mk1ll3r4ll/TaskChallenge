@@ -32,7 +32,6 @@ export default function Login() {
             <Input
               onChange={(e) => setEmail(e.target.value)}
               type="email"
-              id="EmmailAddress"
               value={email}
               aria-describedby="email-helper-text"
             ></Input>
@@ -43,7 +42,6 @@ export default function Login() {
             <Input
               onChange={(e) => setPass(e.target.value)}
               type="password"
-              id="pass"
               value={pass}
               aria-describedby="password-helper-text"
             ></Input>
