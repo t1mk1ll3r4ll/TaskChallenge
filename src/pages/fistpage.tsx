@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import Boton from "@/components/Boton";
+
 const Fistpage = () => {
   const [firstState, setFirstState] = useState(15);
 
