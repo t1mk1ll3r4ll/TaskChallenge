@@ -28,35 +28,40 @@ export default function Home() {
             justifyContent="center"
             width="100%"
           >
-            <Button
-              variant="primary"
-              onClick={() => router.push("/authenticated")}
-              disabled={!user}
-              width="100%"
-            >
-              <a> Ir a la lista de tareas. </a>
-            </Button>
+            {user && (
+              <Button
+                variant="primary"
+                onClick={() => router.push("/authenticated")}
+                disabled={!user}
+                width="100%"
+              >
+                <a> Ir a la lista de tareas. </a>
+              </Button>
+            )}
+            {!user && (
+              <Button
+                variant="success"
+                width="100%"
+                onClick={() => router.push("/login")}
+                disabled={user}
+              >
+                <a> ¡Iniciar sesion! </a>
+              </Button>
+            )}
 
-            <Button
-              variant="success"
-              width="100%"
-              onClick={() => router.push("/login")}
-              disabled={user}
-            >
-              <a> ¡Iniciar sesion! </a>
-            </Button>
-
-            <Button
-              variant="danger"
-              width="100%"
-              disabled={!user}
-              onClick={async () => {
-                await firebase.auth().signOut();
-                window.location.href = "/";
-              }}
-            >
-              Cerrar sesion
-            </Button>
+            {user && (
+              <Button
+                variant="danger"
+                width="100%"
+                disabled={!user}
+                onClick={async () => {
+                  await firebase.auth().signOut();
+                  window.location.href = "/";
+                }}
+              >
+                Cerrar sesion
+              </Button>
+            )}
           </Stack>
         </Box>
       </Flex>
