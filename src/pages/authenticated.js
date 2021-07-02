@@ -29,7 +29,7 @@ export default function Authenticated() {
       .update(params)
       .then((docRef) => {
         getAllData();
-        window.alert("tarea actualizada");
+        window.alert("La tarea se creado con exito");
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
@@ -55,7 +55,6 @@ export default function Authenticated() {
       });
   };
   const [tablefilled, setTableFilled] = useState([]);
-  console.log(tablefilled);
   useEffect(() => {
     getAllData();
   }, []);

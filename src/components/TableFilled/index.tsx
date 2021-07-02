@@ -32,7 +32,7 @@ export default function TableFilled(props: any) {
       .doc(params)
       .delete()
       .then((docRef) => {
-        window.alert("tarea eliminada");
+        window.alert(`La tarea se ha eliminado`);
         window.location.reload();
       })
       .catch((error) => {
@@ -46,7 +46,7 @@ export default function TableFilled(props: any) {
       .doc(edit.uid)
       .update(edit)
       .then((docRef) => {
-        window.alert("tarea actualizada");
+        window.alert("La tarea se actualizo con exito");
         window.location.reload();
       })
       .catch((error) => {
@@ -61,7 +61,9 @@ export default function TableFilled(props: any) {
       .doc(param2.uid)
       .update({ status: e.target.value })
       .then((docRef) => {
-        window.alert("tarea actualizada");
+        window.alert(
+          `El estado de la tarea se ha actualizado a: ${e.target.value}`
+        );
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
@@ -70,10 +72,6 @@ export default function TableFilled(props: any) {
 
   return (
     <div key={data.lenght}>
-      <Button variant="warning" size="sm">
-        cargar lista
-      </Button>
-
       <Table striped bordered hover responsive size="sm">
         <thead>
           <tr>
