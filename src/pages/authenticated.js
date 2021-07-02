@@ -156,9 +156,7 @@ export default function Authenticated() {
         </Box>
       </Flex>
 
-      {tablefilled.length > 0 && (
-        <Tablefill data={tablefilled} getAllData></Tablefill>
-      )}
+      {tablefilled.length > 0 && <Tablefill data={tablefilled}></Tablefill>}
     </div>
   );
 }

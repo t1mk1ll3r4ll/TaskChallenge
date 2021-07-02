@@ -86,10 +86,10 @@ export default function Filltable(props: any) {
           </tr>
         </thead>
         <tbody>
-          {props.data.map((row: any, index: any) => (
+          {props?.data?.map((row: any, index: any) => (
             <tr key={index}>
-              <th>{row.name}</th>
-              <th>{row.description}</th>
+              <th>{row?.name}</th>
+              <th>{row?.description}</th>
               <th>{format(new Date(row?.start), "dd/mm/yyyy hh:mm")}</th>
               <th>{format(new Date(row?.expire), "dd/mm/yyyy hh:mm")}</th>
               <th>
@@ -97,7 +97,7 @@ export default function Filltable(props: any) {
                   <Form.Control
                     as="select"
                     onChange={(e) => cambio(e, row)}
-                    defaultValue={row.status}
+                    defaultValue={row?.status}
                   >
                     <option>Pendiente</option>
                     <option>En progreso</option>
@@ -106,7 +106,7 @@ export default function Filltable(props: any) {
                 </Form.Group>
               </th>
               <th>
-                <Button variant="danger" onClick={() => eliminar(row.uid)}>
+                <Button variant="danger" onClick={() => eliminar(row?.uid)}>
                   Eliminar
                 </Button>
                 <Button variant="info" onClick={() => handleShow(row)}>
