@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "react-bootstrap";
 import firebaseclient from "../firebaseClient";
@@ -20,6 +20,63 @@ export default function Authenticated() {
   const [start, setStart] = useState("");
   const [expire, setExpire] = useState("");
   const [status, setStatus] = useState("");
+
+  const updateDoc = (params) => {
+    const db = firebase.firestore();
+    console.log(params);
+    db.collection("Tarea")
+      .doc(params.uid)
+      .update(params)
+      .then((docRef) => {
+        getAllData();
+        window.alert("tarea actualizada");
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+  };
+
+  const subirdatos = (name, desc, start, expire) => {
+    const db = firebase.firestore();
+    const data = {
+      name: name,
+      description: desc,
+      start: start,
+      expire: expire,
+      status: "Pendiente",
+    };
+    db.collection("Tarea")
+      .add({ name: data.name })
+      .then((docRef) => {
+        updateDoc({ ...data, uid: docRef.id });
+      })
+      .catch((error) => {
+        alert("ocurrio un error al guardar la tarea " + error);
+      });
+  };
+  const [tablefilled, setTableFilled] = useState([]);
+  console.log(tablefilled);
+  useEffect(() => {
+    getAllData();
+  }, []);
+
+  const getAllData = async () => {
+    firebaseclient();
+    const db = firebase.firestore();
+    let listT = [];
+    await db
+      .collection("Tarea")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // console.log(doc.data());
+          listT.push(doc.data());
+          //console.log(tablefilled);
+        });
+      });
+    setTableFilled(listT);
+  };
+
   return (
     <div>
       <Heading as="h2" textAlign=" center" mx="auto">
@@ -44,10 +101,6 @@ export default function Authenticated() {
               }
               onClick={() => {
                 subirdatos(name, desc, start, expire, status);
-                setName("");
-                setDesc("");
-                setExpire("");
-                setStart("");
               }}
             >
               Subir tarea
@@ -103,26 +156,9 @@ export default function Authenticated() {
         </Box>
       </Flex>
 
-      <Tablefill></Tablefill>
+      {tablefilled.length > 0 && (
+        <Tablefill data={tablefilled} getAllData></Tablefill>
+      )}
     </div>
   );
-}
-
-function subirdatos(name, desc, start, expire) {
-  const db = firebase.firestore();
-
-  db.collection("Tarea")
-    .add({
-      name: name,
-      description: desc,
-      start: start,
-      expire: expire,
-      status: "ongoing",
-    })
-    .then(() => {
-      alert("Tarea escrita con exito");
-    })
-    .catch((error) => {
-      alert("ocurrio un error al guardar la tarea " + error);
-    });
 }

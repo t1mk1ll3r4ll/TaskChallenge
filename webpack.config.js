@@ -1,7 +1,7 @@
-/*module.exports = {
+module.exports = {
   resolve: {
     fallback: {
       fs: false,
     },
   },
-};*/
+};
