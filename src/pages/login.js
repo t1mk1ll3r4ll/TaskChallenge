@@ -73,7 +73,6 @@ export default function Login() {
           >
             ¡Crear cuenta!
           </Button>
-
           <Button
             variant="success"
             disabled={email === "" || pass === ""}

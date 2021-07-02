@@ -34,7 +34,7 @@ export default function Home() {
               disabled={!user}
               width="100%"
             >
-              <a> ir a la pagina principal. </a>
+              <a> Ir a la lista de tareas. </a>
             </Button>
 
             <Button
@@ -43,12 +43,13 @@ export default function Home() {
               onClick={() => router.push("/login")}
               disabled={user}
             >
-              <a> iniciar sesion </a>
+              <a> ¡Iniciar sesion! </a>
             </Button>
 
             <Button
               variant="danger"
               width="100%"
+              disabled={!user}
               onClick={async () => {
                 await firebase.auth().signOut();
                 window.location.href = "/";

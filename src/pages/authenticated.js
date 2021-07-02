@@ -100,6 +100,10 @@ export default function Authenticated() {
               }
               onClick={() => {
                 subirdatos(name, desc, start, expire, status);
+                setName("");
+                setDesc("");
+                setStart("");
+                setExpire("");
               }}
             >
               Subir tarea
