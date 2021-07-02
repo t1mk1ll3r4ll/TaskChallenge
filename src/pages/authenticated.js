@@ -49,6 +49,7 @@ export default function Authenticated() {
       .add({ name: data.name })
       .then((docRef) => {
         updateDoc({ ...data, uid: docRef.id });
+        window.location.reload();
       })
       .catch((error) => {
         alert("ocurrio un error al guardar la tarea " + error);
@@ -104,6 +105,7 @@ export default function Authenticated() {
                 setDesc("");
                 setStart("");
                 setExpire("");
+                setStatus("Pendiente");
               }}
             >
               Subir tarea

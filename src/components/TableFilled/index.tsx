@@ -12,6 +12,7 @@ export default function TableFilled(props: any) {
     description: "",
     start: "",
     expire: "",
+    status: "",
     uid: "",
   });
   const handleClose = () => {
