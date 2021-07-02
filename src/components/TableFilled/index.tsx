@@ -4,7 +4,7 @@ import format from "date-fns/format";
 import firebase from "firebase";
 import { Box, Input, Stack, FormControl, FormLabel } from "@chakra-ui/react";
 
-export default function Filltable(props: any) {
+export default function TableFilled(props: any) {
   const [show, setShow] = useState(false);
 
   const [edit, setEdit] = useState({

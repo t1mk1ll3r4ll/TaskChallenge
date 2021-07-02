@@ -3,7 +3,7 @@ import { Heading } from "@chakra-ui/react";
 import { Button } from "react-bootstrap";
 import firebaseclient from "../firebaseClient";
 import firebase from "firebase";
-import Tablefill from "../components/Table";
+import TableFilled from "../components/TableFilled";
 import {
   Flex,
   Box,
@@ -156,7 +156,7 @@ export default function Authenticated() {
         </Box>
       </Flex>
 
-      {tablefilled.length > 0 && <Tablefill data={tablefilled}></Tablefill>}
+      {tablefilled.length > 0 && <TableFilled data={tablefilled}></TableFilled>}
     </div>
   );
 }
