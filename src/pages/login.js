@@ -95,7 +95,7 @@ export default function Login() {
                 });
             }}
           >
-            ¡iniciar sesion!
+            ¡Iniciar sesion!
           </Button>
         </Stack>
       </Box>
