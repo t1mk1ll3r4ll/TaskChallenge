@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import firebaseclient from "../firebaseClient";
 import firebase from "firebase";
 import TableFilled from "../components/TableFilled";
+import Formulario from "../components/AgregarTarea";
 import {
   Flex,
   Box,
@@ -82,7 +83,7 @@ export default function Authenticated() {
       <Heading as="h2" textAlign=" center" mx="auto">
         Lista de tareas
       </Heading>
-
+      <Formulario></Formulario>
       <Flex align="center">
         <Box w={300} my={5} mx="auto">
           <Stack justify="center" isInline>
