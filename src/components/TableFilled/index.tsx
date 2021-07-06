@@ -89,8 +89,12 @@ export default function TableFilled(props: any) {
             <tr key={index}>
               <th>{row?.name}</th>
               <th>{row?.description}</th>
-              <th>{format(new Date(row?.start), "dd/mm/yyyy hh:mm")}</th>
-              <th>{format(new Date(row?.expire), "dd/mm/yyyy hh:mm")}</th>
+              <th>
+                {format(new Date(row?.start.toDate()), "dd MMM yyyy hh:mm")}
+              </th>
+              <th>
+                {format(new Date(row?.expire.toDate()), "dd MMM yyyy hh:mm")}
+              </th>
               <th>
                 <Form.Group>
                   <Form.Control

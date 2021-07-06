@@ -3,11 +3,32 @@ import { useForm } from "react-hook-form";
 import firebaseclient from "firebaseClient";
 import firebase from "firebase";
 import { Button } from "react-bootstrap";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const Index = () => {
   firebaseclient();
   const db = firebase.firestore();
-  const { register, handleSubmit } = useForm();
+  const yesterday = new Date(Date.now() - 86400000);
+  yesterday.toISOString();
+  const schema = yup.object().shape({
+    name: yup.string().required(),
+    description: yup.string().required(),
+    start: yup
+      .date()
+      .min(yesterday, "start cant be before today")
+      .max(yup.ref("expire"), "start date cant be after end date"),
+    expire: yup
+      .date()
+      .min(yup.ref("start"), "end date cant be before start date"),
+  });
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({ resolver: yupResolver(schema) });
+
   const onSubmit = (data: any) =>
     db
       .collection("Tarea")
@@ -30,6 +51,7 @@ const Index = () => {
         console.error("Error adding document: ", error);
       });
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -65,6 +87,12 @@ const Index = () => {
           </Button>
         </div>
       </form>
+      <div style={{ color: "red", padding: "10px" }}>
+        <p>{errors.name?.message}</p>
+        <p>{errors.description?.message}</p>
+        <p>{errors.start?.message}</p>
+        <p>{errors.expire?.message}</p>
+      </div>
     </div>
   );
 };
