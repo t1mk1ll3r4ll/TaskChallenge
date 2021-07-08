@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import firebaseclient from "firebaseClient";
 import firebase from "firebase";
+import "firebase/storage";
 import { Button } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,6 +10,8 @@ import * as yup from "yup";
 const Index = () => {
   firebaseclient();
   const db = firebase.firestore();
+  const storageRef = firebase.storage().ref();
+  const [foto, setFoto] = useState(null);
   const yesterday = new Date(Date.now() - 86400000);
   yesterday.toISOString();
   const schema = yup.object().shape({
@@ -29,14 +32,27 @@ const Index = () => {
     handleSubmit,
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: any) =>
-    db
-      .collection("Tarea")
+  const onSubmit = (data: any) => {
+    uploadDataSubmit(data);
+    uploadPhoto();
+  };
+  const uploadDataSubmit = (data: any) => {
+    db.collection("Tarea")
       .add({ name: data.name })
       .then((docRef) => {
         updateDoc({ ...data, uid: docRef.id });
         window.location.reload();
       });
+  };
+
+  const uploadPhoto = () => {
+    //const dataBlob = new Blob(foto, { type: `image/${foto.File.Type}` });
+    console.log(foto?.File.Type);
+    // var uploadRef = storageRef.child("Images/" + params.uid);
+    // uploadRef.put(dataBlob).then((snapshot) => {
+    //   console.log(dataBlob);
+    // });
+  };
 
   const updateDoc = (params: any) => {
     const db = firebase.firestore();
@@ -81,6 +97,15 @@ const Index = () => {
             <option value="En progreso"> en progreso</option>
             <option value="Finalizada"> finalizada</option>
           </select>
+          <input
+            onChange={(e) => {
+              setFoto(e.target.files);
+            }}
+            type="file"
+            name="taskImage"
+            accept="image/*"
+          />
+
           <Button variant="success" type="submit" size="sm">
             {" "}
             subir nueva tarea{" "}

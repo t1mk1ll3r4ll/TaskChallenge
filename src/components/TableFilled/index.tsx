@@ -2,11 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Table, Button, Modal, Form } from "react-bootstrap";
 import format from "date-fns/format";
 import firebase from "firebase";
+import "firebase/storage";
 import { Box, Input, Stack, FormControl, FormLabel } from "@chakra-ui/react";
 
 export default function TableFilled(props: any) {
-  const [show, setShow] = useState(false);
+  const storagei = firebase.storage();
 
+  if (props.id != undefined) {
+    let pathReference = storagei.ref("Images/" + props.id);
+    pathReference.getDownloadURL().then((url) => {
+      var img = document.getElementById("photo");
+      img?.setAttribute("src", url);
+    });
+  }
+
+  const [show, setShow] = useState(false);
   const [edit, setEdit] = useState({
     name: "",
     description: "",
@@ -82,6 +92,7 @@ export default function TableFilled(props: any) {
             <th>Finalizacion</th>
             <th>Status</th>
             <th>Acciones</th>
+            <th>Imagen</th>
           </tr>
         </thead>
         <tbody>
@@ -117,6 +128,7 @@ export default function TableFilled(props: any) {
                   Editar
                 </Button>
               </th>
+              <th></th>
             </tr>
           ))}
         </tbody>
